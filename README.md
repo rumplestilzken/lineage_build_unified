@@ -18,7 +18,7 @@ Clone both this and the patches repos:
 
 Finally, start the build script - for example, to build for all supported archs:
 
-    bash lineage_build_unified/buildbot_unified.sh treble gargoyle
+    bash lineage_build_unified/buildbot_unified.sh treble gargoyle gargoyleG
 
 Be sure to update the cloned repos from time to time!
 
