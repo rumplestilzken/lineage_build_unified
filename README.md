@@ -3,13 +3,17 @@
 
 Set up your environment by referring to [LineageOS Wiki](https://wiki.lineageos.org/devices/TP1803/build) (mainly "Install the build packages" and "Install the repo command").
 
+Set Up Environment
+
+    mkdir ~/git/
+
 Clone the resources repository to **~/git/**
 
-    git clone https://github.com/rumplestilzken/lineageos_20_td.git
+    git clone https://github.com/rumplestilzken/lineageos_20_td.git ~/git/lineage_20_td
 
 Create a new working directory for your LineageOS build and navigate to it:
 
-    mkdir /usr/local/lineage-20-build-td; cd /usr/local/lineage-20-build-td
+    mkdir ~/git/lineage-20-build-td; cd ~/git/lineage-20-build-td
 
 Initialize your LineageOS workspace:
 
