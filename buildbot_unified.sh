@@ -110,6 +110,10 @@ build_treble() {
         ("64GN") TARGET=arm64_bgN;;
         ("gargoyle") TARGET=gargoyle_bvN;;
         ("gargoyleG") TARGET=gargoyle_bgN;;
+        ("gargoyle_slim") TARGET=gargoyle_slim_bgN;;
+        ("gargoyle_slimG") TARGET=gargoyle_slim_bgN;;
+        ("gargoyle_pocket") TARGET=gargoyle_pocket_bgN;;
+        ("gargoyle_pocketG") TARGET=gargoyle_pocket_bgN;;
         (*) echo "Invalid target - exiting"; exit 1;;
     esac
     lunch lineage_${TARGET}-userdebug
