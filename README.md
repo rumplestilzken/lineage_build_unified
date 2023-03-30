@@ -34,7 +34,7 @@ Run update.sh
 
 Get Device Tree
 
-    git clone https://github.com/rumplestilzken/device_unihertz_gargoyle /usr/local/lineage-20-build-td/device/unihertz
+    git clone https://github.com/rumplestilzken/device_unihertz_gargoyle ~/git/lineage-20-build-td/device/unihertz
  
 Finally, start the build script - for example, to build for all supported archs:
 
