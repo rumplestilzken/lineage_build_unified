@@ -54,7 +54,7 @@ prep_build() {
     echo ""
 
     echo "Syncing repos"
-    repo sync -c --force-sync --no-clone-bundle --no-tags -j$(nproc --all)
+#    repo sync -c --force-sync --no-clone-bundle --no-tags -j$(nproc --all)
     echo ""
 
     echo "Setting up build environment"
@@ -118,6 +118,8 @@ build_treble() {
         ("gargoyle_slimG") TARGET=gargoyle_slim_bgN;;
         ("gargoyle_pocket") TARGET=gargoyle_pocket_bvN;;
         ("gargoyle_pocketG") TARGET=gargoyle_pocket_bgN;;
+        ("gargoyle_tank") TARGET=gargoyle_tank_bvN;;
+        ("gargoyle_tankG") TARGET=gargoyle_tank_bgN;;
         (*) echo "Invalid target - exiting"; exit 1;;
     esac
     lunch lineage_${TARGET}-userdebug
