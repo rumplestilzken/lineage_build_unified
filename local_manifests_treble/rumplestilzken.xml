@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
   <project name="rumplestilzken/device_unihertz_gargoyle" path="device/unihertz" remote="github" revision="main" />
+  <project name="rumplestilzken/gargoyleSettings" path="packages/" remote="github" revision="main" />
 </manifest>
