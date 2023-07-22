@@ -120,12 +120,13 @@ build_treble() {
         ("gargoyle_pocketG") TARGET=gargoyle_pocket_bgN;;
         ("gargoyle_tank") TARGET=gargoyle_tank_bvN;;
         ("gargoyle_tankG") TARGET=gargoyle_tank_bgN;;
+        ("ps_pocket") TARGET=privacysociety_pocket;;
         (*) echo "Invalid target - exiting"; exit 1;;
     esac
     lunch lineage_${TARGET}-userdebug
     make installclean
     make -j$(nproc --all) systemimage
-    mv $OUT/system.img ~/build-output/lineage-20.0-$BUILD_DATE-UNOFFICIAL-${TARGET}$(${PERSONAL} && echo "-personal" || echo "").img
+    mv $OUT/system.img ~/build-output/${TARGET}-1.2.1.img
     #make vndk-test-sepolicy
 }
 
@@ -161,7 +162,7 @@ do
     echo "Starting $(${PERSONAL} && echo "personal " || echo "")build for ${MODE} ${var}"
     build_${MODE} ${var}
 done
-ls ~/build-output | grep 'lineage' || true
+ls ~/build-output | grep 'gargoyle' || true
 
 END=`date +%s`
 ELAPSEDM=$(($(($END-$START))/60))
