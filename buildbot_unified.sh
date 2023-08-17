@@ -121,12 +121,15 @@ build_treble() {
         ("gargoyle_tank") TARGET=gargoyle_tank_bvN;;
         ("gargoyle_tankG") TARGET=gargoyle_tank_bgN;;
         ("ps_pocket") TARGET=privacysociety_pocket;;
+        ("ps_jelly2e") TARGET=privacysociety_jelly2e;;
+        ("ps_atoml") TARGET=privacysociety_atoml;;
+        ("ps_pixel5a") TARGET=privacysociety_pixel5a;;
         (*) echo "Invalid target - exiting"; exit 1;;
     esac
     lunch lineage_${TARGET}-userdebug
     make installclean
     make -j$(nproc --all) systemimage
-    mv $OUT/system.img ~/build-output/${TARGET}-1.2.1.img
+    mv $OUT/system.img ~/build-output/${TARGET}.img
     #make vndk-test-sepolicy
 }
 
