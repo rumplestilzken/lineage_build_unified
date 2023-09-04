@@ -3,38 +3,18 @@
 
 Set up your environment by referring to [LineageOS Wiki](https://wiki.lineageos.org/devices/TP1803/build) (mainly "Install the build packages" and "Install the repo command").
 
-Set Up Environment
-
-    mkdir ~/git/
-
-Clone the resources repository to **~/git/**
-
-    git clone https://github.com/rumplestilzken/lineageos_20_td.git ~/git/lineage_20_td
-
 Create a new working directory for your LineageOS build and navigate to it:
 
     mkdir ~/git/lineage-20-build-td; cd ~/git/lineage-20-build-td
 
 Initialize your LineageOS workspace:
 
-    repo init -u https://github.com/LineageOS/android.git -b lineage-20.0 -git-lfs
+    repo init -u https://github.com/LineageOS/android.git -b lineage-20.0
 
 Clone both this and the patches repos:
 
     git clone https://github.com/rumplestilzken/lineage_build_unified lineage_build_unified -b lineage-20-td
     git clone https://github.com/rumplestilzken/lineage_patches_unified lineage_patches_unified -b lineage-20-td
-
-Run repo sync
-    
-    repo sync
-
-Run update.sh
-    
-    ~/git/lineageos_20_td/update.sh
-
-Get Device Tree
-
-    git clone https://github.com/rumplestilzken/device_unihertz_gargoyle ~/git/lineage-20-build-td/device/unihertz
  
 Finally, start the build script - for example, to build for all supported archs:
 
