@@ -15,7 +15,9 @@ Clone both this and the patches repos:
 
     git clone https://github.com/rumplestilzken/lineage_build_unified lineage_build_unified -b lineage-20-td
     git clone https://github.com/rumplestilzken/lineage_patches_unified lineage_patches_unified -b lineage-20-td
- 
+
+    cd ~/git/lineage-20-build-td; git lfs install
+    
 Finally, start the build script - for example, to build for all supported archs:
 
     bash lineage_build_unified/buildbot_unified.sh treble gargoyle gargoyleG
