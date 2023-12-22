@@ -120,6 +120,8 @@ build_treble() {
         ("gargoyle_pocketG") TARGET=gargoyle_pocket_bgN;;
         ("gargoyle_tank") TARGET=gargoyle_tank_bvN;;
         ("gargoyle_tankG") TARGET=gargoyle_tank_bgN;;
+        ("gargoyle_jelly2e") TARGET=gargoyle_jelly2e_bvN;;
+        ("gargoyle_jelly2eG") TARGET=gargoyle_jelly2e_bgN;;
         ("ps_pocket") TARGET=privacysociety_pocket;;
         ("ps_jelly2e") TARGET=privacysociety_jelly2e;;
         ("ps_atoml") TARGET=privacysociety_atoml;;
