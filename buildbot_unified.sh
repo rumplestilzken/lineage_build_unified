@@ -62,11 +62,11 @@ prep_build() {
     mkdir -p ~/build-output
     echo ""
 
+    repopick -t 13-burnin -r -f
     repopick -t 13-taro-kalama -r -f
     repopick 321337 -r -f # Deprioritize important developer notifications
     repopick 321338 -r -f # Allow disabling important developer notifications
     repopick 321339 -r -f # Allow disabling USB notifications
-    repopick 340916 -r # SystemUI: add burnIn protection
 }
 
 apply_patches() {
