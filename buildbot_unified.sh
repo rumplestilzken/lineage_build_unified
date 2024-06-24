@@ -59,6 +59,7 @@ prep_build() {
 
     echo "Setting up build environment"
     source build/envsetup.sh &> /dev/null
+    source vendor/lineage/vars/aosp_target_release
     mkdir -p ~/build-output
     echo ""
 
@@ -92,6 +93,14 @@ finalize_treble() {
     git clean -fdx
     bash generate.sh lineage
     cd ../../..
+    cd treble_app
+    bash build.sh release
+    cp TrebleApp.apk ../vendor/hardware_overlay/TrebleApp/app.apk
+    cd ..
+    cd vendor/hardware_overlay
+    git add TrebleApp/app.apk
+    git commit -m "[TEMP] Up TrebleApp to $BUILD_DATE"
+    cd ../..
 }
 
 build_device() {
@@ -125,6 +134,7 @@ then
     echo ""
     echo "Setting up build environment"
     source build/envsetup.sh &> /dev/null
+    source vendor/lineage/vars/aosp_target_release
     echo ""
 else
     prep_build
