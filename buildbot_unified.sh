@@ -116,8 +116,8 @@ build_treble() {
         ("64VN") TARGET=arm64_bvN;;
         ("64VS") TARGET=arm64_bvS;;
         ("64GN") TARGET=arm64_bgN;;
-        ("gargoyle") TARGET=gargoyle_bvN;;
-        ("gargoyle_pocket") TARGET=gargoyle_pocket_bvN;;
+        ("jinn") TARGET=jinn_bvN;;
+        ("jinn_pocket") TARGET=jinn_pocket_bvN;;
         (*) echo "Invalid target - exiting"; exit 1;;
     esac
 #    lunch lineage_${TARGET}-${aosp_target_release}-userdebug
