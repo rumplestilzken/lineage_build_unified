@@ -22,6 +22,7 @@ fi
 
 NOSYNC=false
 PERSONAL=false
+SIGNABLE=true
 for var in "${@:2}"
 do
     if [ ${var} == "nosync" ]
@@ -31,8 +32,14 @@ do
     if [ ${var} == "personal" ]
     then
         PERSONAL=true
+        SIGNABLE=false
     fi
 done
+if [ ! -d "$HOME/.android-certs" ]; then
+    read -n1 -r -p $"\$HOME/.android-certs not found - CTRL-C to exit, or any other key to continue"
+    echo ""
+    SIGNABLE=false
+fi
 
 # Abort early on error
 set -eE
@@ -63,7 +70,6 @@ prep_build() {
     mkdir -p ~/build-output
     echo ""
 
-    repopick -t 21-snet -r -f
     repopick 321337 -r -f # Deprioritize important developer notifications
     repopick 321338 -r -f # Allow disabling important developer notifications
     repopick 321339 -r -f # Allow disabling USB notifications
@@ -124,6 +130,16 @@ build_treble() {
     lunch lineage_${TARGET}-ap2a-userdebug
     make installclean
     make -j$(lscpu -b -p=Core,Socket | grep -v '^#' | sort -u | wc -l) systemimage
+
+    SIGNED=false
+    if [ ${SIGNABLE} = true ] && [[ ${TARGET} == *_bg? ]]
+    then
+        make -j$(lscpu -b -p=Core,Socket | grep -v '^#' | sort -u | wc -l) target-files-package otatools
+        bash ./lineage_build_unified/sign_target_files.sh $OUT/signed-target_files.zip
+        unzip -joq $OUT/signed-target_files.zip IMAGES/system.img -d $OUT
+        SIGNED=true
+        echo ""
+    fi
     mv $OUT/system.img ~/build-output/${TARGET}.img
     #make vndk-test-sepolicy
 }
