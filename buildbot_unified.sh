@@ -1,6 +1,6 @@
 #!/bin/bash
 echo ""
-echo "LineageOS 20 Unified Buildbot"
+echo "LineageOS 21 Unified Buildbot"
 echo "Executing in 5 seconds - CTRL-C to exit"
 echo ""
 sleep 5
@@ -22,6 +22,7 @@ fi
 
 NOSYNC=false
 PERSONAL=false
+SIGNABLE=true
 for var in "${@:2}"
 do
     if [ ${var} == "nosync" ]
@@ -31,8 +32,14 @@ do
     if [ ${var} == "personal" ]
     then
         PERSONAL=true
+        SIGNABLE=false
     fi
 done
+if [ ! -d "$HOME/.android-certs" ]; then
+    read -n1 -r -p $"\$HOME/.android-certs not found - CTRL-C to exit, or any other key to continue"
+    echo ""
+    SIGNABLE=false
+fi
 
 # Abort early on error
 set -eE
@@ -59,14 +66,14 @@ prep_build() {
 
     echo "Setting up build environment"
     source build/envsetup.sh &> /dev/null
+    source vendor/lineage/vars/aosp_target_release
     mkdir -p ~/build-output
     echo ""
 
-    repopick -t 13-burnin -r -f
-    repopick -t 13-taro-kalama -r -f
     repopick 321337 -r -f # Deprioritize important developer notifications
     repopick 321338 -r -f # Allow disabling important developer notifications
     repopick 321339 -r -f # Allow disabling USB notifications
+    repopick 368923 -r -f # Launcher3: Show clear all button in recents overview
 }
 
 apply_patches() {
@@ -104,7 +111,7 @@ finalize_treble() {
 
 build_device() {
     brunch ${1}
-    mv $OUT/lineage-*.zip ~/build-output/lineage-20.0-$BUILD_DATE-UNOFFICIAL-${1}$($PERSONAL && echo "-personal" || echo "").zip
+    mv $OUT/lineage-*.zip ~/build-output/lineage-21.0-$BUILD_DATE-UNOFFICIAL-${1}$($PERSONAL && echo "-personal" || echo "").zip
 }
 
 build_treble() {
@@ -115,6 +122,7 @@ build_treble() {
         ("64VN") TARGET=arm64_bvN;;
         ("64VS") TARGET=arm64_bvS;;
         ("64GN") TARGET=arm64_bgN;;
+<<<<<<< HEAD
         ("gargoyle") TARGET=gargoyle_bvN;;
         ("gargoyleG") TARGET=gargoyle_bgN;;
         ("gargoyle_slim") TARGET=gargoyle_slim_bvN;;
@@ -129,13 +137,33 @@ build_treble() {
         ("ps_jelly2e") TARGET=privacysociety_jelly2e;;
         ("ps_atoml") TARGET=privacysociety_atoml;;
         ("ps_pixel5a") TARGET=privacysociety_pixel5a;;
+=======
+        ("jinn") TARGET=jinn_bvN;;
+        ("jinn_pocket") TARGET=jinn_pocket_bvN;;
+>>>>>>> 6cd01283c60308cf37164775ff2370f89f714018
         (*) echo "Invalid target - exiting"; exit 1;;
     esac
-    lunch lineage_${TARGET}-userdebug
+#    lunch lineage_${TARGET}-${aosp_target_release}-userdebug
+    lunch lineage_${TARGET}-ap2a-userdebug
     make installclean
     make -j$(lscpu -b -p=Core,Socket | grep -v '^#' | sort -u | wc -l) systemimage
+<<<<<<< HEAD
     mv $OUT/system.img ~/build-output/${TARGET}.img
    #make vndk-test-sepolicy
+=======
+
+    SIGNED=false
+    if [ ${SIGNABLE} = true ] && [[ ${TARGET} == *_bg? ]]
+    then
+        make -j$(lscpu -b -p=Core,Socket | grep -v '^#' | sort -u | wc -l) target-files-package otatools
+        bash ./lineage_build_unified/sign_target_files.sh $OUT/signed-target_files.zip
+        unzip -joq $OUT/signed-target_files.zip IMAGES/system.img -d $OUT
+        SIGNED=true
+        echo ""
+    fi
+    mv $OUT/system.img ~/build-output/${TARGET}.img
+    #make vndk-test-sepolicy
+>>>>>>> 6cd01283c60308cf37164775ff2370f89f714018
 }
 
 if ${NOSYNC}
@@ -144,6 +172,7 @@ then
     echo ""
     echo "Setting up build environment"
     source build/envsetup.sh &> /dev/null
+    source vendor/lineage/vars/aosp_target_release
     echo ""
 else
     prep_build
