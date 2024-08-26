@@ -88,6 +88,7 @@ prep_device() {
 prep_treble() {
     apply_patches patches_treble_prerequisite
     apply_patches patches_treble_td
+    apply_patches rumplestilzken
 }
 
 finalize_device() {
@@ -122,35 +123,17 @@ build_treble() {
         ("64VN") TARGET=arm64_bvN;;
         ("64VS") TARGET=arm64_bvS;;
         ("64GN") TARGET=arm64_bgN;;
-<<<<<<< HEAD
-        ("gargoyle") TARGET=gargoyle_bvN;;
-        ("gargoyleG") TARGET=gargoyle_bgN;;
-        ("gargoyle_slim") TARGET=gargoyle_slim_bvN;;
-        ("gargoyle_slimG") TARGET=gargoyle_slim_bgN;;
-        ("gargoyle_pocket") TARGET=gargoyle_pocket_bvN;;
-        ("gargoyle_pocketG") TARGET=gargoyle_pocket_bgN;;
-        ("gargoyle_tank") TARGET=gargoyle_tank_bvN;;
-        ("gargoyle_tankG") TARGET=gargoyle_tank_bgN;;
-        ("gargoyle_jelly2e") TARGET=gargoyle_jelly2e_bvN;;
-        ("gargoyle_jelly2eG") TARGET=gargoyle_jelly2e_bgN;;
         ("ps_pocket") TARGET=privacysociety_pocket;;
         ("ps_jelly2e") TARGET=privacysociety_jelly2e;;
+        ("ps_jelly_max") TARGET=privacysociety_jelly_max;;
         ("ps_atoml") TARGET=privacysociety_atoml;;
         ("ps_pixel5a") TARGET=privacysociety_pixel5a;;
-=======
-        ("jinn") TARGET=jinn_bvN;;
-        ("jinn_pocket") TARGET=jinn_pocket_bvN;;
->>>>>>> 6cd01283c60308cf37164775ff2370f89f714018
         (*) echo "Invalid target - exiting"; exit 1;;
     esac
 #    lunch lineage_${TARGET}-${aosp_target_release}-userdebug
     lunch lineage_${TARGET}-ap2a-userdebug
     make installclean
     make -j$(lscpu -b -p=Core,Socket | grep -v '^#' | sort -u | wc -l) systemimage
-<<<<<<< HEAD
-    mv $OUT/system.img ~/build-output/${TARGET}.img
-   #make vndk-test-sepolicy
-=======
 
     SIGNED=false
     if [ ${SIGNABLE} = true ] && [[ ${TARGET} == *_bg? ]]
@@ -163,7 +146,6 @@ build_treble() {
     fi
     mv $OUT/system.img ~/build-output/${TARGET}.img
     #make vndk-test-sepolicy
->>>>>>> 6cd01283c60308cf37164775ff2370f89f714018
 }
 
 if ${NOSYNC}
