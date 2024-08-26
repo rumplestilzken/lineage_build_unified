@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <manifest>
-  <project name="rumplestilzken/device_unihertz_gargoyle" path="device/unihertz" remote="github" revision="main" />
-  <project name="rumplestilzken/privacysociety_device_tree" path="device/privacysociety" remote="github" revision="main" />
+  <project name="rumplestilzken/privacysociety_device_tree" path="device/privacysociety" remote="github" revision="lineage-20-td" />
 </manifest>
