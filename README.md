@@ -13,8 +13,8 @@ Initialize your LineageOS workspace:
 
 Clone both this and the patches repos:
 
-    git clone https://github.com/AndyCGYan/lineage_build_unified lineage_build_unified -b lineage-21-td
-    git clone https://github.com/AndyCGYan/lineage_patches_unified lineage_patches_unified -b lineage-21-td
+    git clone https://github.com/rumplestilzken/lineage_build_unified lineage_build_unified -b lineage-21-td
+    git clone https://github.com/rumplestilzken/lineage_patches_unified lineage_patches_unified -b lineage-21-td
 
 Finally, start the build script - for example, to build for all supported archs:
 
